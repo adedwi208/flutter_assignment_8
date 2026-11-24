@@ -1,6 +1,9 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter8/fcm_token_card.dart';
+import 'package:flutter8/notification_service.dart';
 
 import 'firebase_options.dart';
 
@@ -10,7 +13,11 @@ void main() async {
   // Inisialisasi menggunakan opsi yang di-generate sesuai platform
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   runApp(const MyApp());
+
+  await NotificationService.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Firebase Auth Simple',
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       // Menggunakan StreamBuilder untuk mendeteksi status login
@@ -187,7 +195,7 @@ class UserInfoScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -196,6 +204,8 @@ class UserInfoScreen extends StatelessWidget {
             children: [
               const Icon(Icons.account_circle, size: 100, color: Colors.blue),
               const SizedBox(height: 24),
+              const SizedBox(height: 16),
+              const FcmTokenCard(),
               const Text(
                 'Login Berhasil!',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
