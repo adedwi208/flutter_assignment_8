@@ -9,12 +9,17 @@ plugins {
 
 android {
     namespace = "com.example.flutter8"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    dependencies{
+        coreLibraryDesugaring("com.android.tools:desugar_jdk:2.1.4")
     }
 
     defaultConfig {
