@@ -6,10 +6,11 @@ plugins {
 
 android {
     namespace = "com.example.contoh"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true 
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -28,6 +29,11 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
+
+    dependencies {                                         // <-- BARU
+    // Wajib untuk flutter_local_notifications 
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
 
     buildTypes {
         release {
