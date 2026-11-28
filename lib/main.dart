@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Firebase Auth Simple',
-      debugShowCheckedModeBanner: false,
+      navigatorKey:
+          navigatorKey, // <-- BARU: agar bisa navigasi dari notifikasi
       theme: ThemeData(primarySwatch: Colors.blue),
-      // Menggunakan StreamBuilder untuk mendeteksi status login
       home: const AuthWrapper(),
     );
   }
